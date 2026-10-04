@@ -1,0 +1,14 @@
+{
+  "name": "pocket-park",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check game.js && npx playwright test tests/direct-file-smoke.spec.js --reporter=line",
+    "check:syntax": "node --check game.js",
+    "check:browser": "npx playwright test tests/direct-file-smoke.spec.js --reporter=line"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}

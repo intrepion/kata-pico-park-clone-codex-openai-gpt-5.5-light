@@ -1,0 +1,124 @@
+:root {
+  color-scheme: dark;
+  --bg: #11131c;
+  --panel: #202537;
+  --panel-2: #2c3348;
+  --ink: #f7f4df;
+  --muted: #b9bfd6;
+  --accent: #ffd166;
+  --cyan: #63d2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, #171a27 0%, var(--bg) 54%, #0c0e14 100%);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.shell {
+  width: min(1100px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  letter-spacing: 0;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.stats span,
+.controls div {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(32, 37, 55, 0.88);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.stage-wrap {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #151926;
+  border-radius: 6px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.controls div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.controls strong {
+  color: var(--ink);
+}
+
+.controls span {
+  color: var(--cyan);
+  font-weight: 800;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .stats {
+    justify-content: flex-start;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+  }
+}
