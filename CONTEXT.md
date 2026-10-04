@@ -115,3 +115,23 @@ _Avoid_: Soundtrack, music system
 **Accessibility Floor**:
 The minimum player-inclusion standard for the MVP: non-color identifiers, mute, reduced motion, and readable contrast.
 _Avoid_: Accessibility pass, polish
+
+**Direct-File Play**:
+The ability to launch Pocket Park by opening the root HTML file directly in a browser.
+_Avoid_: Dev server requirement, hosted-only play
+
+**Rule Snapshot**:
+A deterministic debug reading of the current level, Pips, puzzle objects, and completion state used to verify Cooperation Rules.
+_Avoid_: Test dump, engine state
+
+**Playable Spine**:
+The first implementation slice proving the browser shell, canvas rendering, Pip movement, level restart, and Direct-File Play.
+_Avoid_: Prototype, tech demo
+
+**MVP Slice**:
+A committed and pushed vertical increment that adds playable behavior and carries its own verification evidence.
+_Avoid_: Phase, batch, milestone
+
+**Best Time**:
+The locally persisted fastest Elapsed Timer value for a completed level.
+_Avoid_: Score, record
