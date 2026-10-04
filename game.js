@@ -292,7 +292,8 @@
 
   function completeLevel() {
     state.complete = true;
-    statusEl.textContent = "Stage clear. Press R to restart.";
+    const nextText = state.levelIndex < levels.length - 1 ? "Press N for the next stage." : "Stage Set clear.";
+    statusEl.textContent = `Stage clear. Press R to restart. ${nextText}`;
     const bestTimes = loadSave().bestTimes || {};
     const level = levels[state.levelIndex];
     const best = bestTimes[level.id];
@@ -459,6 +460,15 @@
       resetLevel();
       return;
     }
+    if (event.code === "KeyN") {
+      nextLevel();
+      return;
+    }
+    if (/^Digit[1-6]$/.test(event.code)) {
+      state.levelIndex = Number(event.code.slice(5)) - 1;
+      resetLevel();
+      return;
+    }
     keys.add(event.code);
   });
 
@@ -469,6 +479,7 @@
   window.pocketParkTest = {
     snapshot,
     reset: resetLevel,
+    nextLevel,
     setLevel(index) {
       state.levelIndex = clamp(index, 0, levels.length - 1);
       resetLevel();
@@ -499,4 +510,9 @@
 
   resetLevel();
   requestAnimationFrame(frame);
+
+  function nextLevel() {
+    state.levelIndex = (state.levelIndex + 1) % levels.length;
+    resetLevel();
+  }
 })();
