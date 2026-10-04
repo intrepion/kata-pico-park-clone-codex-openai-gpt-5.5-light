@@ -20,6 +20,10 @@ _Avoid_: Avatar, hero, cat
 A fallback control mode where one person alternates control between multiple Pips to test or play cooperative puzzles alone.
 _Avoid_: Single-player mode, AI partner
 
+**Idle Pip**:
+A Pip that remains physically present and reactive while no player is actively pressing its controls.
+_Avoid_: Frozen character, parked player
+
 **Cooperation Rule**:
 A puzzle constraint that requires more than one Pip to solve.
 _Avoid_: Mechanic, gimmick
@@ -27,6 +31,10 @@ _Avoid_: Mechanic, gimmick
 **Body Stack**:
 A vertical arrangement of Pips used to reach spaces that a single Pip cannot reach.
 _Avoid_: Tower, ladder, pile
+
+**Stable Stack**:
+A Body Stack whose lower Pips are grounded or moving slowly enough to support predictable climbing.
+_Avoid_: Locked stack, rigid tower
 
 **Shared Key**:
 A key carried by the Local Party as a group resource rather than as an individual inventory item.
@@ -40,9 +48,17 @@ _Avoid_: Button, switch
 A passage that opens for a short window after a Cooperation Rule is satisfied.
 _Avoid_: Gate, timed gate
 
+**Group Exit**:
+A level finish condition requiring every Pip to reach the exit area.
+_Avoid_: Finish line, solo exit, goal
+
 **Instant Restart**:
 A forgiving reset that immediately returns the current level to its starting state without lives or permanent penalty.
 _Avoid_: Death, game over, punishment
+
+**Coyote Jump**:
+A jump accepted just after a Pip has left solid ground, preserving tight platforming while reducing keyboard frustration.
+_Avoid_: Late jump, jump grace
 
 **Stage Set**:
 The six handcrafted levels that introduce Cooperation Rules one at a time and end with a mixed-rule finale.
