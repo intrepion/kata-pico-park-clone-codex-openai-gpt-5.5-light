@@ -345,10 +345,8 @@
     ctx.strokeStyle = "#ffce4f";
     ctx.lineWidth = 4;
     ctx.strokeRect(72, 68, 816, 398);
-    if (!state.reducedMotion || Math.floor(performance.now() / 500) % 2 === 0) {
-      ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
-      for (let x = 108; x < 860; x += TILE) ctx.fillRect(x, 92, 2, 350);
-    }
+    ctx.fillStyle = state.reducedMotion ? "rgba(255, 255, 255, 0.04)" : "rgba(255, 255, 255, 0.08)";
+    for (let x = 108; x < 860; x += TILE) ctx.fillRect(x, 92, 2, 350);
   }
 
   function drawCurtain() {
