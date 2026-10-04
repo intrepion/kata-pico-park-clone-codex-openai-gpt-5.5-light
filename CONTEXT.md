@@ -63,3 +63,31 @@ _Avoid_: Late jump, jump grace
 **Stage Set**:
 The six handcrafted levels that introduce Cooperation Rules one at a time and end with a mixed-rule finale.
 _Avoid_: Campaign, world, map pack
+
+**Teaching Stage**:
+A Stage Set level that introduces exactly one primary Cooperation Rule.
+_Avoid_: Tutorial, lesson
+
+**Mixed Finale**:
+The final Stage Set level that combines several previously introduced Cooperation Rules.
+_Avoid_: Boss level, final exam
+
+**Fixed Frame**:
+A level camera that shows the playable space without following individual Pips.
+_Avoid_: Follow camera, dynamic camera
+
+**One-Screen Level**:
+A level designed so the Local Party can understand the full cooperative situation at once.
+_Avoid_: Split-screen level, sprawling level
+
+**Push Block**:
+A simple movable block used as a readable prop for holding Pressure Plates.
+_Avoid_: Crate, box, Sokoban block
+
+**Elapsed Timer**:
+A visible clock that measures completion time without causing failure.
+_Avoid_: Countdown, time limit
+
+**Controls Reference**:
+An on-screen display of the fixed keyboard bindings.
+_Avoid_: Remap screen, settings panel
