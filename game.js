@@ -6,6 +6,9 @@
   const titleEl = document.querySelector("#level-title");
   const timerEl = document.querySelector("#timer");
   const statusEl = document.querySelector("#status");
+  const playersButton = document.querySelector("#players-button");
+  const motionButton = document.querySelector("#motion-button");
+  const muteButton = document.querySelector("#mute-button");
 
   const STORAGE_KEY = "pocketPark.v1";
   const TILE = 36;
@@ -19,6 +22,7 @@
 
   const keys = new Set();
   const saved = loadSave();
+  let audioContext = null;
 
   const pipDefs = [
     { id: "star", name: "Pip Star", color: "#ffce4f", ink: "#3f2a00", mark: "*" },
@@ -108,7 +112,9 @@
     timedDoorOpenUntil: 0,
     pips: [],
     pushBlocks: [],
-    plateActive: false
+    plateActive: false,
+    mute: Boolean(saved.mute),
+    reducedMotion: Boolean(saved.reducedMotion)
   };
 
   function rect(x, y, w, h) {
@@ -163,6 +169,7 @@
     titleEl.textContent = level.title;
     statusEl.textContent = level.hint;
     savePatch({ currentLevel: state.levelIndex, playerCount: state.playerCount });
+    syncOptionButtons();
   }
 
   function pressed(code) {
@@ -278,6 +285,7 @@
   function updateRuleObjects(level, now) {
     if (level.key && !state.hasSharedKey && state.pips.some((pip) => overlaps(bodyRect(pip, PIP_SIZE), level.key))) {
       state.hasSharedKey = true;
+      playCue("key");
     }
 
     state.plateActive = (level.plates || []).some((plate) => {
@@ -287,11 +295,13 @@
     });
 
     if (level.door) state.doorOpen = level.key ? state.hasSharedKey : state.plateActive;
+    if (level.timedDoor && state.plateActive && now > state.timedDoorOpenUntil) playCue("door");
     if (level.timedDoor && state.plateActive) state.timedDoorOpenUntil = now + DOOR_HOLD_MS;
   }
 
   function completeLevel() {
     state.complete = true;
+    playCue("clear");
     const nextText = state.levelIndex < levels.length - 1 ? "Press N for the next stage." : "Stage Set clear.";
     statusEl.textContent = `Stage clear. Press R to restart. ${nextText}`;
     const bestTimes = loadSave().bestTimes || {};
@@ -335,8 +345,10 @@
     ctx.strokeStyle = "#ffce4f";
     ctx.lineWidth = 4;
     ctx.strokeRect(72, 68, 816, 398);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
-    for (let x = 108; x < 860; x += TILE) ctx.fillRect(x, 92, 2, 350);
+    if (!state.reducedMotion || Math.floor(performance.now() / 500) % 2 === 0) {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+      for (let x = 108; x < 860; x += TILE) ctx.fillRect(x, 92, 2, 350);
+    }
   }
 
   function drawCurtain() {
@@ -434,6 +446,9 @@
       doorOpen: state.doorOpen,
       timedDoorOpen: level.timedDoor ? performance.now() <= state.timedDoorOpenUntil : false,
       plateActive: state.plateActive,
+      mute: state.mute,
+      reducedMotion: state.reducedMotion,
+      bestTimes: loadSave().bestTimes || {},
       pips: state.pips.map((pip) => ({
         id: pip.id,
         x: Math.round(pip.x),
@@ -457,6 +472,7 @@
 
   window.addEventListener("keydown", (event) => {
     if (event.code === "KeyR") {
+      playCue("restart");
       resetLevel();
       return;
     }
@@ -467,6 +483,18 @@
     if (/^Digit[1-6]$/.test(event.code)) {
       state.levelIndex = Number(event.code.slice(5)) - 1;
       resetLevel();
+      return;
+    }
+    if (event.code === "KeyP") {
+      cyclePlayerCount();
+      return;
+    }
+    if (event.code === "KeyM") {
+      toggleMute();
+      return;
+    }
+    if (event.code === "KeyV") {
+      toggleReducedMotion();
       return;
     }
     keys.add(event.code);
@@ -488,6 +516,8 @@
       state.playerCount = clamp(count, 2, 4);
       resetLevel();
     },
+    toggleMute,
+    toggleReducedMotion,
     setPipPosition(index, x, y) {
       const pip = state.pips[index];
       pip.x = x;
@@ -509,10 +539,59 @@
   };
 
   resetLevel();
+  playersButton.addEventListener("click", cyclePlayerCount);
+  motionButton.addEventListener("click", toggleReducedMotion);
+  muteButton.addEventListener("click", toggleMute);
   requestAnimationFrame(frame);
 
   function nextLevel() {
     state.levelIndex = (state.levelIndex + 1) % levels.length;
     resetLevel();
+  }
+
+  function cyclePlayerCount() {
+    state.playerCount = state.playerCount === 4 ? 2 : state.playerCount + 1;
+    resetLevel();
+  }
+
+  function toggleMute() {
+    state.mute = !state.mute;
+    savePatch({ mute: state.mute });
+    syncOptionButtons();
+  }
+
+  function toggleReducedMotion() {
+    state.reducedMotion = !state.reducedMotion;
+    savePatch({ reducedMotion: state.reducedMotion });
+    syncOptionButtons();
+  }
+
+  function syncOptionButtons() {
+    playersButton.textContent = `${state.playerCount} Pips`;
+    motionButton.textContent = state.reducedMotion ? "Motion Low" : "Motion On";
+    muteButton.textContent = state.mute ? "Sound Off" : "Sound On";
+  }
+
+  function playCue(name) {
+    if (state.mute) return;
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    audioContext = audioContext || new AudioContext();
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    const tones = {
+      key: 740,
+      door: 520,
+      clear: 880,
+      restart: 220
+    };
+    oscillator.frequency.value = tones[name] || 440;
+    oscillator.type = "square";
+    gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.08, audioContext.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.12);
+    oscillator.connect(gain).connect(audioContext.destination);
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.14);
   }
 })();

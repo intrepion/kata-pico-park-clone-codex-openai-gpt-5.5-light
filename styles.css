@@ -51,21 +51,38 @@ h1 {
   letter-spacing: 0;
 }
 
-.stats {
+.stats,
+.actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 8px;
+}
+
+.stats {
   color: var(--muted);
   font-weight: 700;
 }
 
 .stats span,
-.controls div {
+.controls div,
+.actions button {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(32, 37, 55, 0.88);
   border-radius: 8px;
   padding: 8px 10px;
+}
+
+.actions button {
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.actions button:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 2px;
 }
 
 .stage-wrap {
@@ -115,6 +132,10 @@ canvas {
   }
 
   .stats {
+    justify-content: flex-start;
+  }
+
+  .actions {
     justify-content: flex-start;
   }
 
