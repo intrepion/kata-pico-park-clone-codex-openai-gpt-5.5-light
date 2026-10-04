@@ -91,3 +91,27 @@ _Avoid_: Countdown, time limit
 **Controls Reference**:
 An on-screen display of the fixed keyboard bindings.
 _Avoid_: Remap screen, settings panel
+
+**Arcade Stage**:
+The tiny theatrical visual frame for Pocket Park levels, emphasizing readable play spaces with playful arcade personality.
+_Avoid_: Diorama, paper world, minimalist blocks
+
+**Pip Mark**:
+A non-color symbol paired with each Pip's color and face so players can distinguish Pips at a glance.
+_Avoid_: Costume, skin, color-only identity
+
+**After-Hours Playground Arcade**:
+The cohesive visual theme for the Stage Set, blending playground equipment, arcade signage, and quiet closed-at-night staging.
+_Avoid_: Theme worlds, biome set, level skins
+
+**Feedback Cue**:
+A readable animation, icon, or sound that confirms a puzzle-state change.
+_Avoid_: Text prompt, tutorial message
+
+**Sound Effect Set**:
+The small generated audio vocabulary for keys, Pressure Plates, Timed Doors, Group Exit completion, and restarts.
+_Avoid_: Soundtrack, music system
+
+**Accessibility Floor**:
+The minimum player-inclusion standard for the MVP: non-color identifiers, mute, reduced motion, and readable contrast.
+_Avoid_: Accessibility pass, polish
