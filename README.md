@@ -1,5 +1,9 @@
 # Pocket Park
 
+## Play online
+
+[Play Pocket Park](https://intrepion.github.io/kata-pico-park-clone-codex-openai-gpt-5.5-light/) — free, playable in your browser.
+
 Pocket Park is a dependency-free static Canvas cooperative puzzle-platformer inspired by Pico Park's local-party puzzle language. Open `index.html` directly in a browser to play, or serve the folder with any static file server.
 
 ## Play
