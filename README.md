@@ -30,3 +30,7 @@ npm run check
 ```
 
 The check script runs `node --check game.js` and Playwright browser tests against the direct `file://` launch path.
+
+## Arcade metadata
+
+See [docs/arcade-metadata.md](docs/arcade-metadata.md) for the game-owned manifest and screenshot provenance.
