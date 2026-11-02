@@ -1,6 +1,47 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "gameId": "kata-pico-park-clone-codex-openai-gpt-5.5-light",
   "playUrl": "https://intrepion.github.io/kata-pico-park-clone-codex-openai-gpt-5.5-light/",
-  "screenshots": []
+  "screenshots": [
+    {
+      "path": "arcade/screenshots/ci-20261102-01.jpg",
+      "sha256": "41d36ef6c52879c8b044b4375ac4c83bf338a7f4ef2bb15b0b4f261306e3ef3c",
+      "alt": "Pocket Park gameplay, view 1",
+      "provenance": {
+        "kind": "ci_gameplay_capture",
+        "sourcePath": "arcade/capture-evidence/ci-20261102-01.png",
+        "sourceSha256": "55bb30de2242021dbdbf89dd309358d478e1de87048f449382243bc60b2da6f6",
+        "captureCommit": "1dea5f4ccaf730e4c13620df0d2fdb6db256a07e",
+        "workflowRunId": "41402621194",
+        "inputHashes": {
+          "index.html": "5db7963b58cb812e4fefe96d6f3130847eb7721b703a39f2f0a2083d88a04293",
+          "styles.css": "7f5ee48d072b11e8348e55209c2f8ad1b84bf3013dd2b27d8a28195362a83dee",
+          "game.js": "e844092891df2499be348686b9acc9451471bcc998def504a62fd929753f04a5"
+        },
+        "publishedFilesVerifiedAt": "2026-11-02T19:01:20Z",
+        "captureRecordPath": "arcade/capture-evidence/ci-20261102-record.json",
+        "captureRecordSha256": "aab0c1eea0843c6a795276f8e43ab80c676ec077a8a598871ef70866ce1ed581"
+      }
+    },
+    {
+      "path": "arcade/screenshots/ci-20261102-02.jpg",
+      "sha256": "03f04e2312169e1337b82543a5b33aa7885e48d4f37d75e287d1fd40979345cf",
+      "alt": "Pocket Park gameplay, view 2",
+      "provenance": {
+        "kind": "ci_gameplay_capture",
+        "sourcePath": "arcade/capture-evidence/ci-20261102-02.png",
+        "sourceSha256": "c8b646d589feb8fb6ba36a6373bd105cd6d8854ec8a85cb75434106191a8498b",
+        "captureCommit": "1dea5f4ccaf730e4c13620df0d2fdb6db256a07e",
+        "workflowRunId": "41402621194",
+        "inputHashes": {
+          "index.html": "5db7963b58cb812e4fefe96d6f3130847eb7721b703a39f2f0a2083d88a04293",
+          "styles.css": "7f5ee48d072b11e8348e55209c2f8ad1b84bf3013dd2b27d8a28195362a83dee",
+          "game.js": "e844092891df2499be348686b9acc9451471bcc998def504a62fd929753f04a5"
+        },
+        "publishedFilesVerifiedAt": "2026-11-02T19:01:20Z",
+        "captureRecordPath": "arcade/capture-evidence/ci-20261102-record.json",
+        "captureRecordSha256": "aab0c1eea0843c6a795276f8e43ab80c676ec077a8a598871ef70866ce1ed581"
+      }
+    }
+  ]
 }
